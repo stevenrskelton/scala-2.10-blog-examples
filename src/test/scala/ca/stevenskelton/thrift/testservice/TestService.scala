@@ -7,7 +7,7 @@ class TestService extends TestApi.FutureIface {
 
 	private def result(id: Int, msDelay: Int, counter: AtomicInteger) = {
 		counter.incrementAndGet
-		if (msDelay > 0) Thread.sleep(200)
+		if (msDelay > 0) Thread.sleep(msDelay)
 		id match {
 			case 1 | 10 | 100 => Future.value(SampleStruct(id, s"Id$id"))
 			case 2 => throw NotFoundException(s"Id Not Found: $id")
