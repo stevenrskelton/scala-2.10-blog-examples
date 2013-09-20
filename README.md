@@ -17,5 +17,5 @@ aren't quite sure how to set it up or integrate it into your own code.
 
 ## Classes in ca.stevenskelton package
 
-I'll try to fill in this package with version of blog code which is more appropriate 
+I'll try to fill in this package with versions of blog code that are more appropriate 
 for others to reuse.
