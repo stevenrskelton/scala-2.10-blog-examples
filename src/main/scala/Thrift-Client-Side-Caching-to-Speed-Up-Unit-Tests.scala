@@ -1,5 +1,5 @@
 /**
- * Part of a blog entry at:
+ * Part of a blog entry at: http://stevenskelton.ca/thrift-client-side-caching-to-speed-up-unit-tests/
  */
 import com.twitter.finagle.{ Service, SimpleFilter }
 import com.twitter.util.Future

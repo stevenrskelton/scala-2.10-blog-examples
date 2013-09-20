@@ -1,5 +1,5 @@
 /**
- * Part of a blog entry at:
+ * Part of a blog entry at: http://stevenskelton.ca/tracking-clients-with-finagle/
  */
 import com.twitter.finagle.{ Service, SimpleFilter, TransportException }
 import com.twitter.util.{ Time, Future, Try, Return, Throw }

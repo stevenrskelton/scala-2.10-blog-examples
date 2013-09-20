@@ -1,5 +1,5 @@
 /**
- * Part of a blog entry at:
+ * Part of a blog entry at: http://stevenskelton.ca/multiplexed-services-in-finagle/
  */
 import com.twitter.util.Future
 import org.apache.thrift.transport.{ TTransport, TMemoryInputTransport }
