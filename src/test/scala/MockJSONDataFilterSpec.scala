@@ -15,7 +15,7 @@ class MockJSONDataFilterSpec extends mutable.SpecificationWithJUnit {
   val filter = new MockJSONDataFilter(TestApi, log)
 
   val clientService = ClientBuilder().codec(ThriftClientFramedCodec()).hosts(socket).hostConnectionLimit(2).build()
-  val client = new TestApi.FinagledClient(filter andThen clientService)
+  val client = new TestApi$FinagleClient(filter andThen clientService)
 
   "read mock data" in {
     client.wNoDelay(999).get.name === "Id999"

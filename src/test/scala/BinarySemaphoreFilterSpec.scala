@@ -22,7 +22,7 @@ class BinarySemaphoreFilterSpec extends mutable.SpecificationWithJUnit {
   "queue items" in {
     val serviceWithoutFilter = future {
       ServerBuilder().codec(ThriftServerFramedCodec()).bindTo(socket).name("test")
-        .build(new TestApi.FinagledService(new TestService, new TBinaryProtocol.Factory))
+        .build(new TestApi$FinagleService(new TestService, new TBinaryProtocol.Factory))
     }
 
     //start service in different thread
@@ -36,19 +36,19 @@ class BinarySemaphoreFilterSpec extends mutable.SpecificationWithJUnit {
     Thread.sleep(175)
     time(client.w200msDelay(1).get) must beGreaterThanOrEqualTo(200L)
 
-    Await.result(serviceWithoutFilter, scala.concurrent.duration.Duration(1, scala.concurrent.duration.SECONDS)).close()
+    Await.result(serviceWithoutFilter, scala.concurrent.duration.Duration(1, scala.concurrent.duration.SECONDS)).close().get
 
     val service = future {
       ServerBuilder().codec(ThriftServerFramedCodec()).bindTo(socket).name("test")
-        .build(filter andThen new TestApi.FinagledService(new TestService, new TBinaryProtocol.Factory))
+        .build(filter andThen new TestApi$FinagleService(new TestService, new TBinaryProtocol.Factory))
     }
 
     Thread.sleep(100)
     client.w200msDelay(1)
-    Thread.sleep(175)
+    Thread.sleep(100)
     time(client.w200msDelay(1).get) must beLessThan(200L)
 
-    Await.result(service, scala.concurrent.duration.Duration(1, scala.concurrent.duration.SECONDS)).close()
+    Await.result(service, scala.concurrent.duration.Duration(1, scala.concurrent.duration.SECONDS)).close().get
 
     success
   }
@@ -57,17 +57,17 @@ class BinarySemaphoreFilterSpec extends mutable.SpecificationWithJUnit {
 
     val service = future {
       ServerBuilder().codec(ThriftServerFramedCodec()).bindTo(socket).name("test")
-        .build(filter andThen new TestApi.FinagledService(new TestService, new TBinaryProtocol.Factory))
+        .build(filter andThen new TestApi$FinagleService(new TestService, new TBinaryProtocol.Factory))
     }
 
     Thread.sleep(100)
     client.w200msDelay(1)
-    Thread.sleep(175)
+    Thread.sleep(100)
     time(client.w200msDelay(1).get) must beLessThan(200L)
     Thread.sleep(200)
     time(client.w200msDelay(1).get) must beGreaterThanOrEqualTo(200L)
 
-    Await.result(service, scala.concurrent.duration.Duration(1, scala.concurrent.duration.SECONDS)).close()
+    Await.result(service, scala.concurrent.duration.Duration(1, scala.concurrent.duration.SECONDS)).close().get
 
     success
 

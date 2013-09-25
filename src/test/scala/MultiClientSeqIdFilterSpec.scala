@@ -17,15 +17,15 @@ class MultiClientSeqIdFilterSpec extends mutable.SpecificationWithJUnit {
   val codecFactory = new ThriftClientFramedCodecFactory(None, true, new TBinaryProtocol.Factory())
 
   val clientService = ClientBuilder().codec(codecFactory).hosts(socket).hostConnectionLimit(2).build()
-  val client = new TestApi.FinagledClient(filter andThen clientService)
-  val client1 = new TestApi.FinagledClient(new MultiClientSeqIdFilter(1, numberOfClients) andThen clientService)
-  val client2 = new TestApi.FinagledClient(new MultiClientSeqIdFilter(2, numberOfClients) andThen clientService)
+  val client = new TestApi$FinagleClient(filter andThen clientService)
+  val client1 = new TestApi$FinagleClient(new MultiClientSeqIdFilter(1, numberOfClients) andThen clientService)
+  val client2 = new TestApi$FinagleClient(new MultiClientSeqIdFilter(2, numberOfClients) andThen clientService)
 
   val consoleLogFilter = new BinaryProtocolToJsonLoggingFilter(TestApi, println)
   val apiUsageFilter = new ApiClientUsageStats(Map(1 -> "ClientA", 2 -> "ClientB", 3 -> "ClientC"), numberOfClients)
 
   val service = ServerBuilder().codec(ThriftServerFramedCodec()).bindTo(socket).name("test")
-    .build(apiUsageFilter andThen consoleLogFilter andThen new TestApi.FinagledService(new TestService, new TBinaryProtocol.Factory))
+    .build(apiUsageFilter andThen consoleLogFilter andThen new TestApi$FinagleService(new TestService, new TBinaryProtocol.Factory))
 
   "test from log output" in {
     client.wNoDelay(1).get

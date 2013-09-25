@@ -11,12 +11,12 @@ class FixedSizeCacheSpec extends mutable.SpecificationWithJUnit {
 
   val socket = com.twitter.util.RandomSocket()
   val clientService = ClientBuilder().codec(ThriftClientFramedCodec()).hosts(socket).hostConnectionLimit(2).build()
-  val client = new TestApi.FinagledClient(clientService)
+  val client = new TestApi$FinagleClient(clientService)
 
   val filter = new BinaryProtocolToJsonLoggingFilter(TestApi, println) andThen new FixedSizeCache(Seq("w1sDelay", "w200msDelay"))
 
   val service = ServerBuilder().codec(ThriftServerFramedCodec()).bindTo(socket).name("test")
-    .build(filter andThen new TestApi.FinagledService(new TestService, new TBinaryProtocol.Factory))
+    .build(filter andThen new TestApi$FinagleService(new TestService, new TBinaryProtocol.Factory))
 
   "not cache methods not in list" in {
 

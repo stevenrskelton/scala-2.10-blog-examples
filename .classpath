@@ -4,11 +4,7 @@
 	<classpathentry kind="src" path="src/test/scala"/>
 	<classpathentry kind="src" path="src/main/resources"/>
 	<classpathentry kind="con" path="org.scala-ide.sdt.launching.SCALA_CONTAINER"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7">
-		<attributes>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="RedisTests/lib/native"/>
-		</attributes>
-	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
 	<classpathentry kind="lib" path="lib_managed/bundles/com.github.spullara.mustache.java/compiler/compiler-0.8.12.jar"/>
 	<classpathentry kind="lib" path="lib_managed/bundles/io.netty/netty/netty-3.6.6.Final.jar"/>
 	<classpathentry kind="lib" path="lib_managed/bundles/org.scalaz/scalaz-concurrent_2.10/scalaz-concurrent_2.10-7.0.2.jar"/>
@@ -47,10 +43,7 @@
 	<classpathentry kind="lib" path="lib_managed/jars/org.codehaus.plexus/plexus-utils/plexus-utils-1.5.4.jar"/>
 	<classpathentry kind="lib" path="lib_managed/jars/org.fusesource.jansi/jansi/jansi-1.4.jar"/>
 	<classpathentry kind="lib" path="lib_managed/jars/org.hamcrest/hamcrest-core/hamcrest-core-1.3.jar"/>
-	<classpathentry kind="lib" path="lib_managed/jars/org.scala-lang/jline/jline-2.10.1.jar"/>
-	<classpathentry kind="lib" path="lib_managed/jars/org.scala-lang/scala-compiler/scala-compiler-2.10.1.jar"/>
 	<classpathentry kind="lib" path="lib_managed/jars/org.scala-lang/scala-library/scala-library-2.10.2.jar"/>
-	<classpathentry kind="lib" path="lib_managed/jars/org.scala-lang/scala-reflect/scala-reflect-2.10.1.jar"/>
 	<classpathentry kind="lib" path="lib_managed/jars/org.slf4j/slf4j-api/slf4j-api-1.5.8.jar"/>
 	<classpathentry kind="lib" path="lib_managed/jars/org.specs2/specs2_2.10/specs2_2.10-2.2.2.jar"/>
 	<classpathentry kind="output" path="bin"/>

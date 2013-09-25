@@ -25,7 +25,7 @@ class BinaryProtocolToJsonLoggingSpec extends mutable.SpecificationWithJUnit {
       .codec(ThriftServerFramedCodec())
       .name("FooBar")
       .bindTo(socket)
-      .build(consoleLogFilter andThen new TestApi.FinagledService(new TestService, new TBinaryProtocol.Factory))
+      .build(consoleLogFilter andThen new TestApi$FinagleService(new TestService, new TBinaryProtocol.Factory))
 
     fooClient.wNoDelay(1).get.name === "Id1"
     server.close().get() === ()
@@ -37,7 +37,7 @@ class BinaryProtocolToJsonLoggingSpec extends mutable.SpecificationWithJUnit {
       .codec(ThriftServerFramedCodec())
       .name("FooBar")
       .bindTo(socket)
-      .build(consoleLogFilter andThen new TestApi.FinagledService(new TestService, new TBinaryProtocol.Factory))
+      .build(consoleLogFilter andThen new TestApi$FinagleService(new TestService, new TBinaryProtocol.Factory))
     fooClient.wNoDelay(1).get.name === "Id1"
     server.close().get() === ()
 

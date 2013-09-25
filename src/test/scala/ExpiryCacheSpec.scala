@@ -12,12 +12,13 @@ class ExpiryCacheSpec extends mutable.SpecificationWithJUnit {
 
   sequential
 
-  val clientService = ClientBuilder().codec(ThriftClientFramedCodec()).hosts(new InetSocketAddress("localhost", 10000)).hostConnectionLimit(2).build()
-  val client = new TestApi.FinagledClient(clientService)
+  val socket = com.twitter.util.RandomSocket()
+  val clientService = ClientBuilder().codec(ThriftClientFramedCodec()).hosts(socket).hostConnectionLimit(2).build()
+  val client = new TestApi$FinagleClient(clientService)
 
   val filter = new BinaryProtocolToJsonLoggingFilter(TestApi, println) andThen new ExpiryCache(Duration(1, SECONDS))
-  val service = ServerBuilder().codec(ThriftServerFramedCodec()).bindTo(new InetSocketAddress(10000)).name("test")
-    .build(filter andThen new TestApi.FinagledService(new TestService, new TBinaryProtocol.Factory))
+  val service = ServerBuilder().codec(ThriftServerFramedCodec()).bindTo(socket).name("test")
+    .build(filter andThen new TestApi$FinagleService(new TestService, new TBinaryProtocol.Factory))
 
   "expire items" in {
     client.w200msDelay(1).get.name == "Id1"
