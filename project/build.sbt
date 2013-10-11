@@ -10,3 +10,5 @@ libraryDependencies ++= Seq(
 	"com.twitter" %% "scrooge-runtime" % "3.8.0",
 	"com.twitter" %% "scrooge-generator" % "3.8.0"
 )
+
+addSbtPlugin("com.typesafe.sbteclipse" % "sbteclipse-plugin" % "2.3.0")

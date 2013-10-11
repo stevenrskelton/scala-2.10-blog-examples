@@ -11,6 +11,7 @@ newSettings
 libraryDependencies ++= Seq(
 	"org.apache.thrift" % "libthrift" % "0.9.1",
 	"com.twitter" %% "finagle-thrift" % "6.6.2",
+	"com.twitter" %% "finagle-serversets" % "6.6.2",
 	"com.twitter" %% "finagle-ostrich4" % "6.6.2",
 	"com.twitter" %% "scrooge-runtime" % "3.8.0",
 	"com.twitter" %% "scrooge-generator" % "3.8.0",
