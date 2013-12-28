@@ -1,5 +1,6 @@
 *.class
 *.log
+lib/
 bin/
 dist/*
 target/

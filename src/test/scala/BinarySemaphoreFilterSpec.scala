@@ -20,10 +20,8 @@ class BinarySemaphoreFilterSpec extends mutable.SpecificationWithJUnit {
   val filter = new BinaryProtocolToJsonLoggingFilter(TestApi, println) andThen new BinarySemaphoreFilter
 
   "queue items" in {
-    val serviceWithoutFilter = future {
-      ServerBuilder().codec(ThriftServerFramedCodec()).bindTo(socket).name("test")
-        .build(new TestApi$FinagleService(new TestService, new TBinaryProtocol.Factory))
-    }
+    val serviceWithoutFilter = ServerBuilder().codec(ThriftServerFramedCodec()).bindTo(socket).name("test")
+      .build(new TestApi$FinagleService(new TestService, new TBinaryProtocol.Factory))
 
     //start service in different thread
     //wait for service initialization
@@ -36,29 +34,25 @@ class BinarySemaphoreFilterSpec extends mutable.SpecificationWithJUnit {
     Thread.sleep(175)
     time(client.w200msDelay(1).get) must beGreaterThanOrEqualTo(200L)
 
-    Await.result(serviceWithoutFilter, scala.concurrent.duration.Duration(1, scala.concurrent.duration.SECONDS)).close().get
+    serviceWithoutFilter.close().get
 
-    val service = future {
-      ServerBuilder().codec(ThriftServerFramedCodec()).bindTo(socket).name("test")
-        .build(filter andThen new TestApi$FinagleService(new TestService, new TBinaryProtocol.Factory))
-    }
+    val service = ServerBuilder().codec(ThriftServerFramedCodec()).bindTo(socket).name("test")
+      .build(filter andThen new TestApi$FinagleService(new TestService, new TBinaryProtocol.Factory))
 
     Thread.sleep(100)
     client.w200msDelay(1)
     Thread.sleep(100)
     time(client.w200msDelay(1).get) must beLessThan(200L)
 
-    Await.result(service, scala.concurrent.duration.Duration(1, scala.concurrent.duration.SECONDS)).close().get
+    service.close().get
 
     success
   }
 
   "release items" in {
 
-    val service = future {
-      ServerBuilder().codec(ThriftServerFramedCodec()).bindTo(socket).name("test")
-        .build(filter andThen new TestApi$FinagleService(new TestService, new TBinaryProtocol.Factory))
-    }
+    val service = ServerBuilder().codec(ThriftServerFramedCodec()).bindTo(socket).name("test")
+      .build(filter andThen new TestApi$FinagleService(new TestService, new TBinaryProtocol.Factory))
 
     Thread.sleep(100)
     client.w200msDelay(1)
@@ -67,7 +61,7 @@ class BinarySemaphoreFilterSpec extends mutable.SpecificationWithJUnit {
     Thread.sleep(200)
     time(client.w200msDelay(1).get) must beGreaterThanOrEqualTo(200L)
 
-    Await.result(service, scala.concurrent.duration.Duration(1, scala.concurrent.duration.SECONDS)).close().get
+    service.close().get
 
     success
 
