@@ -2,6 +2,8 @@ retrieveManaged := true
 
 scalaVersion := "2.10.3"
 
+EclipseKeys.withSource := true
+
 resolvers += "Typesafe Releases" at "http://repo.typesafe.com/typesafe/maven-releases"
 
 resolvers += "Twttr" at "http://maven.twttr.com/"
